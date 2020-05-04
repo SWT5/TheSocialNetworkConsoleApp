@@ -6,16 +6,12 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace TheSocialNetworkConsoleApp.Models
 {
-    public class Circle
+    public class Comment
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string CircleId { get; set; }
-
-        public string CircleName { get; set; }
-
-        public List<string> UsersId { get; set; } = new List<string>();
-
-        public List<Post> Posts { get; set; } = new List<Post>();
+        public string CommentId { get; set; }
+        public string CommentText { get; set; }
+        
     }
 }
