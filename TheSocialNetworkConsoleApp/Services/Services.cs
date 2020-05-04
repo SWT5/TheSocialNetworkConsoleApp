@@ -59,27 +59,22 @@ namespace TheSocialNetworkConsoleApp.Services
 
         //********************Services for Circle collection********************
 
-        //Different get methods************************
         public List<Circle> GetCircle() => _circle.Find(circle => true).ToList();
 
         public Circle GetCirle(string circleId) =>
             _circle.Find<Circle>(circle => circle.CircleId == circleId).FirstOrDefault();
 
 
-
-        //Different create methods************************
         public Circle CreateCircle(Circle NewCircle)
         {
             _circle.InsertOne(NewCircle);
             return NewCircle;
         }
 
-        //Different Update methods************************
         public void UpdateCircle(string circleId, Circle circleIn) =>
             _circle.ReplaceOne(circle => circle.CircleId == circleId, circleIn);
 
 
-        //Different Remove methods************************
         public void RemoveCircle(Circle circleIn) =>
             _circle.DeleteOne(circle => circle.CircleId == circleIn.CircleId);
 
