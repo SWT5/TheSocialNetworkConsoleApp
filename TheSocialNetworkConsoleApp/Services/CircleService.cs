@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MongoDB.Driver.Core.Configuration;
 using TheSocialNetworkConsoleApp.Models;
+using Microsoft.Extensions.Configuration;
 
 namespace TheSocialNetworkConsoleApp.Services
 {
