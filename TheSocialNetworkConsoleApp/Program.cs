@@ -14,22 +14,22 @@ namespace TheSocialNetworkConsoleApp
         static void Main(string[] args)
         {
             // connects to a local database
-            Services._client = new MongoClient("mongodb://127.0.0.1:27017/");
-            Services._database = Services._client.GetDatabase("SocialNetworkDb");
+            Services.Services._client = new MongoClient("mongodb://127.0.0.1:27017/");
+            Services.Services._database = Services.Services._client.GetDatabase("SocialNetworkDb");
 
-            services.CreateCollection();    //comment this out after first run of the programme
-            services.GetCollections();
+            services.CreateCollections();    //comment this out after first run of the programme
+            services.retrieveCollections();
 
-            Create create = new Create(services);
+            SetUp setUp = new SetUp(services);
 
-            create.SeedingData();           //comment this out after first run of the programme
+            //SetUp.SeedingData();           //comment this out after first run of the programme
 
             User Currentuser = new User();
             Wall wall = new Wall(services);
             Feed feed = new Feed(services);
 
             Console.WriteLine("WELCOME TO THE SOCIAL NETWORK");
-            Currentuser = create.Login();
+            Currentuser = setUp.UserLogin();
 
 
 
@@ -57,7 +57,7 @@ namespace TheSocialNetworkConsoleApp
                                 TextContent = postContent,
                                 Author = Currentuser.UserName
                             };
-                            create.PostToCircle(Currentuser, textPost);
+                            setUp.PostOptions(Currentuser, textPost);
                         }
                         else if (postType == "M")
                         {
@@ -88,7 +88,7 @@ namespace TheSocialNetworkConsoleApp
                                 }
                             } while (memeInput != "0");
 
-                            create.PostToCircle(Currentuser, memePost);
+                            setUp.PostOptions(Currentuser, memePost);
                         }
                         input = "0";
                         break;
@@ -127,7 +127,7 @@ namespace TheSocialNetworkConsoleApp
                                 warningMessageNumber_NotValid();
                             } while (true);
 
-                            create.AddComment(yourFeed[numberCommentsOfFeed - 1]);
+                            setUp.NewComment(yourFeed[numberCommentsOfFeed - 1]);
                         }
                         else if (choosingComment == "1")
                         {
@@ -145,7 +145,7 @@ namespace TheSocialNetworkConsoleApp
                             var feedMemeChoice = Console.ReadLine();
                             var post = yourFeed[feedMemeNumber - 1] as MemePost;
                             post.Options[feedMemeChoice]++;
-                            create.UpdatePoll(post);
+                            setUp.UpdatePosts(post);
                         }
                         input = "0";
                         break;
@@ -190,7 +190,7 @@ namespace TheSocialNetworkConsoleApp
                             } while (true);
 
                             Console.WriteLine(wallOfUser[wallCommentNumber - 1].Author);
-                            create.AddComment(wallOfUser[wallCommentNumber - 1]);
+                            setUp.NewComment(wallOfUser[wallCommentNumber - 1]);
                         }
                         else if (commentWallChoice == "1")
                         {
@@ -208,7 +208,7 @@ namespace TheSocialNetworkConsoleApp
                             var WallMemeChoice = Console.ReadLine();
                             var post = wallOfUser[wallMemeNumber - 1] as MemePost;
                             post.Options[WallMemeChoice]++;
-                            create.UpdatePoll(post);
+                            setUp.UpdatePosts(post);
                         }
                         input = "0";
                         break;
@@ -277,7 +277,7 @@ namespace TheSocialNetworkConsoleApp
                         break;
 
                     case "6":
-                        create.AddUser();
+                        setUp.newUser();
                         break;
 
                     case "7":
