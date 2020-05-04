@@ -18,7 +18,7 @@ namespace TheSocialNetworkConsoleApp.Queries
             User user = _services.GetUser(userId); 
             User guest = _services.GetUser(guestId);
 
-            if(user.BlockList.Contains(guest.userId))
+            if(user.BlockedList.Contains(guest.UserId))
             {
                 return new List<Post>();
             }
