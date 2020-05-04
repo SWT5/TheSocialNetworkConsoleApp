@@ -21,18 +21,8 @@ namespace TheSocialNetworkConsoleApp.Models
         public string PostInCircle { get; set; }
         public Circle Circle { get; set; }
 
-        public List<Comments> CommentsList { get; set; }
+        public List<Comment> Comments { get; set; }
 
         public List<string> Content { get; set; }
-    }
-
-    public class Comments
-    {
-        public string Author { get; set; }
-        public User CommentsAuthor { get; set; }
-
-        public DateTime CommentCreationTime { get; set; }
-
-        public string Text { get; set; }
     }
 }
