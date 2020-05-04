@@ -6,7 +6,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace TheSocialNetworkConsoleApp.Models
 {
-    class Comment
+    public class Comment
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]

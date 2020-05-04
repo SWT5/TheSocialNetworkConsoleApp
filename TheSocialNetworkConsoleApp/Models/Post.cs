@@ -7,7 +7,7 @@ using TheSocialNetworkConsoleApp.Models;
 
 namespace TheSocialNetworkConsoleApp.Models
 {
-    class Post
+    public class Post
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]

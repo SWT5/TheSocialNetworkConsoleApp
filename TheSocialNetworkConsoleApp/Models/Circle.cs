@@ -6,7 +6,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace TheSocialNetworkConsoleApp.Models
 {
-    class Circle
+    public class Circle
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
