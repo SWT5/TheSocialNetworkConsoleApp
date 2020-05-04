@@ -7,7 +7,9 @@ using TheSocialNetworkConsoleApp.Models;
 
 namespace TheSocialNetworkConsoleApp.Models
 {
-    public class Post
+    [BsonDiscriminator(RootClass = true)]
+    [BsonKnownTypes(typeof(VideoPost), typeof(MemePost), typeof(TextPost)]
+    public abstract class Post
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
@@ -24,5 +26,6 @@ namespace TheSocialNetworkConsoleApp.Models
         public List<Comment> Comments { get; set; } = new List<Comment>();
 
         public List<string> Content { get; set; }
+        public abstract void print();
     }
 }
