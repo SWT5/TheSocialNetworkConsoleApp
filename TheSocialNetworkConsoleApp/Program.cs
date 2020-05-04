@@ -53,7 +53,7 @@ namespace TheSocialNetworkConsoleApp
                             TextPost textPost = new TextPost()
                             {
                                 CreationTime = DateTime.Now,
-                                Content = postContent,
+                                TextContent = postContent,
                                 Author = Currentuser.UserName
                             };
                             create.PostToCircle(Currentuser, textPost);
@@ -61,12 +61,12 @@ namespace TheSocialNetworkConsoleApp
                         else if (postType == "M")
                         {
                             Console.WriteLine("Please enter Meme title: ");
-                            string memeContent = Console.ReadLine();
+                            var memeContent = Console.ReadLine();
                             string memeInput = "";
                             MemePost memePost = new MemePost()
                             {
                                 CreationTime = DateTime.Now,
-                                Content = memeContent,
+                                MemeContent = memeContent,
                                 Options = new Dictionary<string, int>(),
                                 Author = Currentuser.UserName
                             };
@@ -95,6 +95,16 @@ namespace TheSocialNetworkConsoleApp
                         Console.WriteLine("------------------------------------------------------------------------------------------");
                         Console.WriteLine("||                       THIS IS YOUR FEED                                              ||");
                         Console.WriteLine("------------------------------------------------------------------------------------------");
+                        var yourFeed = feed.GetFeed(Currentuser.UserId);
+                        int postNumberInFeed = 1;
+                        foreach (var post in yourFeed)
+                        {
+                            Console.WriteLine($"------------------ PostNumber: {postNumberInFeed++} ------------------------");
+                            post.print();
+                        }
+
+                        Console.WriteLine("|| 0  || Text Post                  ||");
+
                         break;
 
                 }
