@@ -21,7 +21,7 @@ namespace TheSocialNetworkConsoleApp.Models
         public string PostInCircle { get; set; }
         public Circle Circle { get; set; }
 
-        public List<Comment> Comments { get; set; }
+        public List<Comment> Comments { get; set; } = new List<Comment>();
 
         public List<string> Content { get; set; }
     }
