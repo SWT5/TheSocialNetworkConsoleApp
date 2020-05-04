@@ -1,36 +1,52 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
 using TheSocialNetworkConsoleApp.Models;
 using TheSocialNetworkConsoleApp.Services;
-using System.Collections.Generic;
-using System.Linq;
-
 
 namespace TheSocialNetworkConsoleApp.Queries
 {
-    class Feed
+    public class Feed
     {
         public Feed(Services.Services services)
         {
             _services = services;
         }
 
-        public List<Post>
+        public List<Post> GetFeed(string userId)
+        {
+            var user = _services.GetUser(userId);
+            List<Post> Feed = new List<Post>();
 
+            var FriendList = _services.GetUser().
+                Where(f =>
+                user.FriendList.Contains(f.UserId) &&
+                !f.BlockedList.Contains(user.UserId)).ToList();
 
-        /*Vores egne: */
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string FeedID { get; set; }
+            /*Users own post:*/
+            Feed.AddRange(_services.GetUser(userId).Posts);
 
-        public string Logged_In_User_Id { get; set; }
+            /*Post from friends:*/
+            foreach(var friend in FriendList)
+            {
+                Feed.AddRange(friend.Posts);
+            }
 
-        public User UsersFeed { get; set; }
+            /*Post from own cicle:*/
+            var Owncircle = _services.GetCircle().Where(c => user.Circles.Contains(c.CircleId));
+            foreach(var circle in Owncircle)
+            {
+                Feed.AddRange(circle.Posts);
+            }
+
+            /*Returns 5 post to user's own feed:*/
+            return Feed.OrderByDescending(f => f.CreationTime).Take(10).ToList();
+        }
+
+        public Services.Services _services { get; set; }
     }
 
-  
+
 }
 

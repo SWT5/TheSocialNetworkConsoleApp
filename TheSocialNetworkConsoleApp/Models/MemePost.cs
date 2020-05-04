@@ -6,12 +6,12 @@ namespace TheSocialNetworkConsoleApp.Models
 {
     public class MemePost : Post
     {
-        public string Content { get; set; }
+        public string MemeContent { get; set; }
         public Dictionary<string, int> Options { get; set; } = new Dictionary<string, int>(); // Ved ikke hvad det er....
 
         public override void print()
         {
-            Console.WriteLine("Write something here...:" + Content);
+            Console.WriteLine("Write something here...:" + MemeContent);
         }
     }
 }

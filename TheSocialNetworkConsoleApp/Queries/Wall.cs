@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using TheSocialNetworkConsoleApp.Models;
@@ -30,12 +31,12 @@ namespace TheSocialNetworkConsoleApp.Queries
                 if(guest.Circles.Contains(id))
                 {
                     OwnPosts.AddRange(_services.GetCircle()
-                        .SelectMany(c => c.Post)
+                        .SelectMany(c => c.Posts)
                         .Where(p => p.Author == user.UserName));
                 }
             }
 
-            return OwnPosts.OrderByDecending(p => p.Timestamp).Take(5).ToList();
+            return OwnPosts.OrderByDescending(p=>p.CreationTime).Take(5).ToList();
         }
 
 
