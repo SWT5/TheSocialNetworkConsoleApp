@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
+using TheSocialNetworkConsoleApp.Models;
+using TheSocialNetworkConsoleApp.Queries;
+
 
 namespace TheSocialNetworkConsoleApp.Services
 {
@@ -16,7 +20,6 @@ namespace TheSocialNetworkConsoleApp.Services
 
             _feed = database.GetCollection<Feed>("feed");
         }
-
 
         public List<Feed> Get() =>
             _feed.Find(feed => true).ToList();

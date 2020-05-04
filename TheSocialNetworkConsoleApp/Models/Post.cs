@@ -8,7 +8,7 @@ using TheSocialNetworkConsoleApp.Models;
 namespace TheSocialNetworkConsoleApp.Models
 {
     [BsonDiscriminator(RootClass = true)]
-    [BsonKnownTypes(typeof(VideoPost), typeof(MemePost), typeof(TextPost)]
+    [BsonKnownTypes(typeof(VideoPost), typeof(MemePost), typeof(TextPost))]
     public abstract class Post
     {
         [BsonId]
@@ -16,15 +16,14 @@ namespace TheSocialNetworkConsoleApp.Models
         public string PostID { get; set; }
 
         public string Author { get; set; }
-        public User PostsAuthor { get; set; }
 
         public DateTime CreationTime { get; set; }
 
         public string PostInCircle { get; set; }
+
+        public User PostsAuthor { get; set; }
         public Circle Circle { get; set; }
-
         public List<Comment> Comments { get; set; } = new List<Comment>();
-
         public List<string> Content { get; set; }
         public abstract void print();
     }
