@@ -95,6 +95,16 @@ namespace TheSocialNetworkConsoleApp
                         Console.WriteLine("------------------------------------------------------------------------------------------");
                         Console.WriteLine("||                       THIS IS YOUR FEED                                              ||");
                         Console.WriteLine("------------------------------------------------------------------------------------------");
+                        var yourFeed = feed.GetFeed(Currentuser.UserId);
+                        int postNumberInFeed = 1;
+                        foreach (var post in yourFeed)
+                        {
+                            Console.WriteLine($"------------------ PostNumber: {postNumberInFeed++} ------------------------");
+                            post.print();
+                        }
+
+                        Console.WriteLine("|| 0  || Text Post                  ||");
+
                         break;
 
                 }
