@@ -11,7 +11,7 @@ namespace TheSocialNetworkConsoleApp.Models
 
         public override void print()
         {
-            Console.WriteLine("Video post: \n" + TextContent);
+            Console.WriteLine("Text post: \n" + TextContent);
             Console.WriteLine("Posted at: " + CreationTime);
             Console.WriteLine("Options:");
 
