@@ -214,7 +214,7 @@ namespace TheSocialNetworkConsoleApp
                         break;
 
                     case "4":
-                        Console.WriteLine("Please enter the username you want to follow: ");
+                        Console.WriteLine("Please enter the username you want to follow/unfollow: ");
                         var UserToFollow = Console.ReadLine();
                         var findUserToFollow = services.GetUser().FirstOrDefault(u => UserToFollow == u.UserName);
                         if (findUserToFollow == null)
@@ -224,8 +224,16 @@ namespace TheSocialNetworkConsoleApp
                             break;
                         }
 
-                        if (Currentuser.FriendList.Contains(findUserToFollow.UserId))
+                        if (Currentuser.FriendList.Contains(findUserToFollow.UserId))   // hvis user findes i db vil den gå ind i if noget med circle
                         {
+                            if(Currentuser.Circles == findUserToFollow.Circles) // hvis der findes et circlename i currentusers circles, som også findes i findUsertoFollows circles 
+                            {
+                                Currentuser.FriendList.Add(findUserToFollow.UserId);
+                                Console.WriteLine("------------------------------------------------------------------------------------------");
+                                Console.WriteLine("||                    A USER HAS BEEN ADDED TO YOUR FRIENDLIST SUCCESSFULLY!            ||");
+                                Console.WriteLine("------------------------------------------------------------------------------------------");
+                                break;
+                            }
                             Currentuser.FriendList.Add(findUserToFollow.UserId);
                             Console.WriteLine("------------------------------------------------------------------------------------------");
                             Console.WriteLine("||                    A USER HAS BEEN ADDED TO YOUR FRIENDLIST SUCCESSFULLY!            ||");
@@ -235,10 +243,10 @@ namespace TheSocialNetworkConsoleApp
                         {
                             Currentuser.FriendList.Remove(findUserToFollow.UserId);
                             Console.WriteLine("------------------------------------------------------------------------------------------");
-                            Console.WriteLine("||                    A USER HAS BEEN REMOVED TO YOUR FRIENDLIST SUCCESSFULLY!          ||");
+                            Console.WriteLine("||                    A USER HAS BEEN REMOVED FROM YOUR FRIENDLIST SUCCESSFULLY!          ||");
                             Console.WriteLine("------------------------------------------------------------------------------------------");
                         }
-                        Currentuser.FriendList.Add(findUserToFollow.UserId);
+                        //Currentuser.FriendList.Add(findUserToFollow.UserId);
                         services.UpdateUser(Currentuser.UserId, Currentuser);
 
                         input = "0";
@@ -281,9 +289,13 @@ namespace TheSocialNetworkConsoleApp
                         break;
 
                     case "7":
+                        setUp.AddCircle(Currentuser);
+                        input = "0";
                         break;
 
                     case "8":
+                        Currentuser = setUp.UserLogin();
+                        input = "0";
                         break;
 
                     case "9":
