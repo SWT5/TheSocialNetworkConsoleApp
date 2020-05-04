@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using MongoDB.Driver;
 using TheSocialNetworkConsoleApp.Models;
 using TheSocialNetworkConsoleApp.Queries;
@@ -9,7 +10,7 @@ namespace TheSocialNetworkConsoleApp
 {
     class Program
     {
-        static Services services = new Services();
+        static Services.Services services = new Services.Services();
         static void Main(string[] args)
         {
             // connects to a local database
@@ -91,6 +92,7 @@ namespace TheSocialNetworkConsoleApp
                         }
                         input = "0";
                         break;
+                    
                     case "2":
                         Console.WriteLine("------------------------------------------------------------------------------------------");
                         Console.WriteLine("||                       THIS IS YOUR FEED                                              ||");
@@ -103,8 +105,112 @@ namespace TheSocialNetworkConsoleApp
                             post.print();
                         }
 
-                        Console.WriteLine("|| 0  || Text Post                  ||");
+                        Console.WriteLine("|| 0  || Enter to add a comment for one of the posts      ||");
+                        if (yourFeed.OfType<MemePost>().Any())
+                        {
+                            Console.WriteLine("|| 1  || Enter to vote on meme   ||");
+                        }
+                        Console.WriteLine("|| Enter  || To continue             ||");
+                        var choosingComment = Console.ReadLine();
+                        if (choosingComment == "0")
+                        {
+                            var numberCommentsOfFeed = 0;
+                            do
+                            {
+                                Console.WriteLine("Please enter the number of post you wish to comment on: ");
+                                numberCommentsOfFeed = int.Parse(Console.ReadLine());
+                                if (numberCommentsOfFeed <= 5 && numberCommentsOfFeed >= 1)
+                                {
+                                    break;
+                                }
 
+                                warningMessageNumber_NotValid();
+                            } while (true);
+
+                            create.AddComment(yourFeed[numberCommentsOfFeed - 1]);
+                        }
+                        else if (choosingComment == "1")
+                        {
+                            var feedMemeNumber = 0;
+                            do
+                            {
+                                Console.WriteLine("Please enter the number of the post you wish to vote on: ");
+                                feedMemeNumber = int.Parse(Console.ReadLine());
+                                if (feedMemeNumber <= 5 && feedMemeNumber >= 1) break;
+                                if ((yourFeed[feedMemeNumber - 1] is MemePost)) break;
+                                warningMessageNumber_NotValid();
+                            } while (true);
+
+                            Console.WriteLine("Choose the option to vote for: (Name of the option. Case sensitive)");
+                            var feedMemeChoice = Console.ReadLine();
+                            var post = yourFeed[feedMemeNumber - 1] as MemePost;
+                            post.Options[feedMemeChoice]++;
+                            create.UpdatePoll(post);
+                        }
+                        input = "0";
+                        break;
+
+                    case "3":
+                        Console.WriteLine("Please enter a user to visit their wall:");
+                        var userInput = Console.ReadLine();
+                        var findUser = services.GetUser().FirstOrDefault(u => userInput == u.UserName);
+                        if (findUser == null)
+                        {
+                            Console.WriteLine("------------------------------------------------------------------------------------------");
+                            Console.WriteLine("||                       WARNING: USER DOES NOT EXIST - PRESS ENTER TO CONTINUE         ||");
+                            Console.WriteLine("------------------------------------------------------------------------------------------");
+                            Console.ReadLine();
+                            input = "0";
+                            break;
+                        }
+                        var wallOfUser = wall.GetWall(findUser.UserId, Currentuser.UserId);
+                        int PostnumberOnWall = 1;
+                        foreach (var post in wallOfUser)
+                        {
+                            Console.WriteLine($"------------------ PostNumber: {PostnumberOnWall++} ------------------------");
+                            post.print();
+                        }
+
+                        Console.WriteLine("|| 0  || Enter to add a comment      ||");
+                        if (wallOfUser.OfType<MemePost>().Any())
+                        {
+                            Console.WriteLine("|| 1  || Enter to vote on meme   ||");
+                        }
+                        Console.WriteLine("|| Enter  || To continue             ||");
+                        var commentWallChoice = Console.ReadLine();
+                        if (commentWallChoice == "0")
+                        {
+                            var wallCommentNumber = 0;
+                            do
+                            {
+                                Console.WriteLine("Please enter the number of the post you wish to comment on:");
+                                wallCommentNumber = int.Parse(Console.ReadLine());
+                                if (wallCommentNumber <= 5 && wallCommentNumber >= 1) break;
+                                warningMessageNumber_NotValid();
+                            } while (true);
+
+                            Console.WriteLine(wallOfUser[wallCommentNumber - 1].Author);
+                            create.AddComment(wallOfUser[wallCommentNumber - 1]);
+                        }
+                        else if (commentWallChoice == "1")
+                        {
+                            var wallMemeNumber = 0;
+                            do
+                            {
+                                Console.WriteLine("Please enter the number of the post you wish to vote on:");
+                                wallMemeNumber = int.Parse(Console.ReadLine());
+                                if (wallMemeNumber <= 5 && wallMemeNumber >= 1) break;
+                                if ((wallOfUser[wallMemeNumber - 1] is MemePost)) break;
+                                warningMessageNumber_NotValid();
+                            } while (true);
+
+                            Console.WriteLine("Choose the option to vote for: (Name of the option. Case sensitive)");
+                            var WallPollChoice = Console.ReadLine();
+                            var post = wallOfUser[wallMemeNumber - 1] as MemePost;
+                            post.Options[WallPollChoice]++;
+                            create.UpdatePoll(post);
+                        }
+                        input = "0";
                         break;
 
                 }
@@ -143,6 +249,13 @@ namespace TheSocialNetworkConsoleApp
             Console.WriteLine("|| T  || Text Post                  ||");
             Console.WriteLine("|| M  || Meme Post                  ||");
             Console.WriteLine("||    || Anything else to return    ||");
+        }
+
+        static void warningMessageNumber_NotValid()
+        {
+            Console.WriteLine("------------------------------------------------------------------------------------------");
+            Console.WriteLine("||                       WARNING: NUMBER IS NOT VALID - PLEASE TRY AGAIN                ||");
+            Console.WriteLine("------------------------------------------------------------------------------------------");
         }
     }
 }
