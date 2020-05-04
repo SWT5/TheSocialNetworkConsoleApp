@@ -50,7 +50,7 @@ namespace TheSocialNetworkConsoleApp.Queries
 
         public void newCircle(User currentUser)
         {
-            Console.WriteLine("To create/ join circle, type name of circle");
+            Console.WriteLine("To create/join circle, type name of circle");
             var circleName = Console.ReadLine();
             if(_services.GetCircle().FirstOrDefault(c => c.CircleName == circleName) != null)
             {
