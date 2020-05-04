@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using TheSocialNetworkConsoleApp.Models;
 
 namespace TheSocialNetworkConsoleApp.Queries
 {
@@ -16,7 +17,12 @@ namespace TheSocialNetworkConsoleApp.Queries
             var user = _services.GetUser(userId); 
             var guest = _services.GetUser(guestId);
 
-            if()
+            if(user.BlockList.Contains(guest.userId))
+            {
+                return new List<Post>();
+            }
+
+
         }
 
 
