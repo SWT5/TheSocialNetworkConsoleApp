@@ -26,6 +26,6 @@ namespace TheSocialNetworkConsoleApp.Queries
         }
 
 
-        public Services _services { get; set; }
+        public Services.Services _services { get; set; }
     }
 }
