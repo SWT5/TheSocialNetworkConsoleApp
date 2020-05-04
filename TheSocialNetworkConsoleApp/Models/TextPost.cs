@@ -7,7 +7,7 @@ namespace TheSocialNetworkConsoleApp.Models
     public class TextPost : Post
     {
         public string TextContent { get; set; }
-        public Dictionary<string, int> Options { get; set; } = new Dictionary<string, int>(); // Ved ikke hvad det er....
+        public Dictionary<string, int> Options { get; set; } = new Dictionary<string, int>(); 
 
         public override void print()
         {
