@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
+using TheSocialNetworkConsoleApp.Models;
 
 namespace TheSocialNetworkConsoleApp.Services
 {
@@ -24,7 +26,7 @@ namespace TheSocialNetworkConsoleApp.Services
 
         public User Get(string id)
         {
-            return _users.Find<User>(user => user.Id == id).FirstOrDefault();
+            return _users.Find<User>(user => user.UserId == id).FirstOrDefault();
         }
 
         public User Create(User user)
@@ -34,12 +36,12 @@ namespace TheSocialNetworkConsoleApp.Services
         }
 
         public void Update(string id, User userIn) =>
-            _users.ReplaceOne(user => user.Id == id, userIn);
+            _users.ReplaceOne(user => user.UserId == id, userIn);
 
         public void Remove(User userIn) =>
-            _users.DeleteOne(user => user.Id == userIn.Id);
+            _users.DeleteOne(user => user.UserId == userIn.UserId);
 
         public void Remove(string id) =>
-            _users.DeleteOne(user => user.Id == id);
+            _users.DeleteOne(user => user.UserId == id);
     }
 }

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
+using TheSocialNetworkConsoleApp.Models;
 
 namespace TheSocialNetworkConsoleApp.Services
 {
@@ -47,3 +49,4 @@ namespace TheSocialNetworkConsoleApp.Services
 
         }
     }
+}
