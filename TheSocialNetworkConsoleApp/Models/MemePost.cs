@@ -11,7 +11,20 @@ namespace TheSocialNetworkConsoleApp.Models
 
         public override void print()
         {
-            Console.WriteLine("Write something here...:" + MemeContent);
+            Console.WriteLine("Meme post: \n" + MemeContent);
+            Console.WriteLine("Posted at: " + CreationTime);
+            Console.WriteLine("Options:");
+
+            foreach (var option in Options)
+            {
+                Console.WriteLine(option.Key + " " + option.Value);
+            }
+            var commentCount = Comments.Count;
+            for (int i = 0; i < commentCount; i++)
+            {
+                Console.WriteLine($"\nComment nr: {i + 1}");
+                Console.WriteLine(Comments[i].CommentText);
+            }
         }
     }
 }
