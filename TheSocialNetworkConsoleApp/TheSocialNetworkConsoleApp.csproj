@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Service\" />
+    <Folder Include="Services\" />
     <Folder Include="Queries\" />
   </ItemGroup>
 
