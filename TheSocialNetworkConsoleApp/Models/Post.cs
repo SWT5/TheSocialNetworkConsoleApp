@@ -8,7 +8,7 @@ using TheSocialNetworkConsoleApp.Models;
 namespace TheSocialNetworkConsoleApp.Models
 {
     [BsonDiscriminator(RootClass = true)]
-    [BsonKnownTypes(typeof(VideoPost), typeof(MemePost), typeof(TextPost)]
+    [BsonKnownTypes(typeof(VideoPost), typeof(MemePost), typeof(TextPost))]
     public abstract class Post
     {
         [BsonId]
