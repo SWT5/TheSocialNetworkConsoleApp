@@ -14,7 +14,7 @@ namespace TheSocialNetworkConsoleApp.Queries
             _services = services;
         }
 
-        public List<Post> GetFeed(string userId)
+        public List<Post> ShowFeed(string userId)
         {
             var user = _services.GetUser(userId);
             List<Post> Feed = new List<Post>();
