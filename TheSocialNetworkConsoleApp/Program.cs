@@ -205,11 +205,94 @@ namespace TheSocialNetworkConsoleApp
                             } while (true);
 
                             Console.WriteLine("Choose the option to vote for: (Name of the option. Case sensitive)");
-                            var WallPollChoice = Console.ReadLine();
+                            var WallMemeChoice = Console.ReadLine();
                             var post = wallOfUser[wallMemeNumber - 1] as MemePost;
-                            post.Options[WallPollChoice]++;
+                            post.Options[WallMemeChoice]++;
                             create.UpdatePoll(post);
                         }
+                        input = "0";
+                        break;
+
+                    case "4":
+                        Console.WriteLine("Please enter the username you want to follow: ");
+                        var UserToFollow = Console.ReadLine();
+                        var findUserToFollow = services.GetUser().FirstOrDefault(u => UserToFollow == u.UserName);
+                        if (findUserToFollow == null)
+                        {
+                            Console.WriteLine("\nUser does not exist");
+                            input = "0";
+                            break;
+                        }
+
+                        if (Currentuser.FriendList.Contains(findUserToFollow.UserId))
+                        {
+                            Currentuser.FriendList.Add(findUserToFollow.UserId);
+                            Console.WriteLine("------------------------------------------------------------------------------------------");
+                            Console.WriteLine("||                    A USER HAS BEEN ADDED TO YOUR FRIENDLIST SUCCESSFULLY!            ||");
+                            Console.WriteLine("------------------------------------------------------------------------------------------");
+                        }
+                        else
+                        {
+                            Currentuser.FriendList.Remove(findUserToFollow.UserId);
+                            Console.WriteLine("------------------------------------------------------------------------------------------");
+                            Console.WriteLine("||                    A USER HAS BEEN REMOVED TO YOUR FRIENDLIST SUCCESSFULLY!          ||");
+                            Console.WriteLine("------------------------------------------------------------------------------------------");
+                        }
+                        Currentuser.FriendList.Add(findUserToFollow.UserId);
+                        services.UpdateUser(Currentuser.UserId, Currentuser);
+
+                        input = "0";
+                        break;
+
+                    case "5":
+                        Console.WriteLine("Please enter a username you wish to add to your blocked list:");
+                        var BlockedUser = Console.ReadLine();
+                        var findUserToBlock = services.GetUser().FirstOrDefault(u => BlockedUser == u.UserName);
+                        if (findUserToBlock == null)
+                        {
+                            Console.WriteLine("------------------------------------------------------------------------------------------");
+                            Console.WriteLine("||                           WARNING: USER DOES NOT EXIST!                              ||");
+                            Console.WriteLine("------------------------------------------------------------------------------------------");
+                            input = "0";
+                            break;
+                        }
+
+                        if (Currentuser.BlockedList.Contains(findUserToBlock.UserId))
+                        {
+                            Currentuser.BlockedList.Add(findUserToBlock.UserId);
+                            Console.WriteLine("------------------------------------------------------------------------------------------");
+                            Console.WriteLine("||                        A USER HAS BEEN BLOCKED SUCCESSFULLY!                         ||");
+                            Console.WriteLine("------------------------------------------------------------------------------------------");
+                        }
+                        else
+                        {
+                            Currentuser.BlockedList.Remove(findUserToBlock.UserId);
+                            Console.WriteLine("------------------------------------------------------------------------------------------");
+                            Console.WriteLine("||                        A USER HAS BEEN UNBLOCKED SUCCESSFULLY!                       ||");
+                            Console.WriteLine("------------------------------------------------------------------------------------------");
+                        }
+                        services.UpdateUser(Currentuser.UserId, Currentuser);
+
+                        input = "0";
+                        break;
+
+                    case "6":
+                        create.AddUser();
+                        break;
+
+                    case "7":
+                        break;
+
+                    case "8":
+                        break;
+
+                    case "9":
+                        return;
+
+                    default:
+                        Console.WriteLine("------------------------------------------------------------------------------------------");
+                        Console.WriteLine("||                         WARNING: WRONG COMMAND - PLEASE TRY AGAIN                    ||");
+                        Console.WriteLine("------------------------------------------------------------------------------------------");
                         input = "0";
                         break;
 
