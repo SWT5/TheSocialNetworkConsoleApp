@@ -91,7 +91,21 @@ namespace TheSocialNetworkConsoleApp.Queries
 
         }
 
-        public void newCircle(User currentUser)
+        public void NewCircle(User currentUser, string circleName)
+        {
+            var newCircle = new Circle()
+            {
+                CircleName = circleName
+            };
+            newCircle.UsersId.Add(currentUser.UserId);
+            _services.CreateCircle(newCircle);
+
+            currentUser.Circles.Add(newCircle.CircleId);
+            Console.WriteLine("press enter to return to main menu");
+            Console.ReadLine();
+        }
+
+        public void AddCircle(User currentUser)
         {
             Console.WriteLine("To create/join circle, type name of circle");
             var circleName = Console.ReadLine();
@@ -102,16 +116,7 @@ namespace TheSocialNetworkConsoleApp.Queries
             }
             else
             {
-                var newCircle = new Circle()
-                {
-                    CircleName = circleName
-                };
-                newCircle.UsersId.Add(currentUser.UserId);
-                _services.CreateCircle(newCircle);
-
-                currentUser.Circles.Add(newCircle.CircleId);
-                Console.WriteLine("press enter to return to main menu");
-                Console.ReadLine();
+                NewCircle(currentUser, circleName);
             }
             _services.UpdateUser(currentUser.UserId, currentUser);
         }
