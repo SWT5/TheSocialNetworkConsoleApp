@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.Extensions.Configuration;
+using TheSocialNetworkConsoleApp.Models;
+using TheSocialNetworkConsoleApp.Queries;
 using MongoDB.Driver;
 
 namespace TheSocialNetworkConsoleApp.Services

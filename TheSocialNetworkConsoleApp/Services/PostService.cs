@@ -9,11 +9,11 @@ namespace TheSocialNetworkConsoleApp.Services
 {
     class PostService
     {
-        public class PostService
+        public class PostServices
         {
             private readonly IMongoCollection<Post> _Post;
 
-            public PostService(IConfiguration config)
+            public PostServices(IConfiguration config)
             {
                 MongoClient client = new MongoClient(config.GetConnectionString("SocialNetworkDb"));
                 IMongoDatabase database = client.GetDatabase("SocialNetworkDb");
