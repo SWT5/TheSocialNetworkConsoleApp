@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using TheSocialNetworkConsoleApp.Models;
+using TheSocialNetworkConsoleApp.Services;
 
 namespace TheSocialNetworkConsoleApp.Queries
 {
@@ -26,6 +27,6 @@ namespace TheSocialNetworkConsoleApp.Queries
         }
 
 
-        public Services _services { get; set; }
+        public Services.Services _services { get; set; }
     }
 }

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using MongoDB.Driver;
+using TheSocialNetworkConsoleApp.Models;
 
 namespace TheSocialNetworkConsoleApp.Services
 {
-    class Services
+    public class Services
     {
         public static IMongoClient _client;
         public static IMongoDatabase _database;

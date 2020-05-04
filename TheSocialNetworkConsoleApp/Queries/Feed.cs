@@ -4,16 +4,22 @@ using System.Text;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using TheSocialNetworkConsoleApp.Models;
+using TheSocialNetworkConsoleApp.Services;
+using System.Collections.Generic;
+using System.Linq;
+
+
 namespace TheSocialNetworkConsoleApp.Queries
 {
     class Feed
     {
-        public Feed(Collection collection)
+        public Feed(Services.Services services)
         {
-            _collection = collection;
+            _services = services;
         }
 
-        public List<Post> 
+        public List<Post>
+
 
         /*Vores egne: */
         [BsonId]
@@ -24,4 +30,7 @@ namespace TheSocialNetworkConsoleApp.Queries
 
         public User UsersFeed { get; set; }
     }
+
+  
 }
+
