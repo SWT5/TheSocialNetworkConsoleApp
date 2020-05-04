@@ -16,27 +16,70 @@ namespace TheSocialNetworkConsoleApp.Queries
             _services = services;
         }
 
-       
+        
+        
+        //Method to post a Post to a given Circle
+        public void PostToCircle(Circle circle, Post content)
+        {
+            circle.Posts.Add(content);
+            _services.UpdateCircle(circle.CircleId, circle);
+        }
 
+        //Method with option to post public or to a circle
+        public void PostOptions(User loggedInUser, Post post)
+        {
+            Console.WriteLine("Either type the circle you want to the post added to or input 'P' for public post");
+            var inputString = Console.ReadLine();
+            //If the logged in user wants to do post publicly
+            if (inputString == "P")
+            {
+                loggedInUser.Posts.Add(post);
+                _services.UpdateUser(loggedInUser.UserId,loggedInUser);
+            }
+            else
+            {
+                var c = _services.GetCircle().FirstOrDefault(c => c.CircleName == inputString); //check if the circle is located in the DB
+                if (c != null) //Add to circle if there 
+                    PostToCircle(c, post);
+                else
+                    Console.WriteLine("No circle with that name");
+            }
+        }
 
+        public User UserLogin()
+        {
+            Console.WriteLine("What user do you want to be logged in as? - Enter username: ");
+            var UN = Console.ReadLine();
+            if (_services.GetUser().Any(un => un.UserName == UN)) //check if any user with this name exists in DB 
+                return _services.GetUser().First(u => u.UserName == UN); //return the user if exists 
 
+            Console.WriteLine("The username you've entered doesn't exist in our database\n");
+            Console.WriteLine("Follow these instructions to create a new user with the name you just entered\n");
+            User createNewUser = new User();
+            createNewUser.UserName = UN;
+            Console.WriteLine("Age please: \n");
+            createNewUser.Age = int.Parse(Console.ReadLine());
+            Console.WriteLine("Gender please: \n");
+            createNewUser.Gender = Console.ReadLine();
 
+            return _services.CreateUser(createNewUser); //create a new user 
+        }
 
         public void newUser()
         {
             Console.WriteLine("Enter username: ");
             var username = Console.ReadLine();
-            while(_services.GetUser().Any(u => u.UserName == username))
+            while (_services.GetUser().Any(u => u.UserName == username))
             {
                 Console.WriteLine("User already exists. type new username or type 0 to cancel");
                 var tempUsername = Console.ReadLine();
-                if(tempUsername == "0")
+                if (tempUsername == "0")
                     return;
 
                 username = tempUsername;
             }
 
-            User newUser = new User(); 
+            User newUser = new User();
             newUser.UserName = username;
             Console.WriteLine("\nAge: ");
             newUser.Age = int.Parse(Console.ReadLine());
@@ -50,7 +93,7 @@ namespace TheSocialNetworkConsoleApp.Queries
 
         public void newCircle(User currentUser)
         {
-            Console.WriteLine("To create/ join circle, type name of circle");
+            Console.WriteLine("To create/join circle, type name of circle");
             var circleName = Console.ReadLine();
             if(_services.GetCircle().FirstOrDefault(c => c.CircleName == circleName) != null)
             {
@@ -73,7 +116,7 @@ namespace TheSocialNetworkConsoleApp.Queries
             _services.UpdateUser(currentUser.UserId, currentUser);
         }
 
-        public void AddComment(Post commentToPost)
+        public void NewComment(Post commentToPost)
         {
             Console.WriteLine("type comment: ");
             var comment = Console.ReadLine();
@@ -95,7 +138,6 @@ namespace TheSocialNetworkConsoleApp.Queries
                 }
             }
         }
-
         public void UpdatePosts(Post post)
         {
             var user = _services.GetUser().Single(u => u.UserName == post.Author);
