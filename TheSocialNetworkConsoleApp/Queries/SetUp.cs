@@ -16,40 +16,8 @@ namespace TheSocialNetworkConsoleApp.Queries
             _services = services;
         }
 
-       
-
-
-
-
-
-        public void newUser()
-        {
-            Console.WriteLine("Enter username: ");
-            var username = Console.ReadLine();
-            while(_services.GetUser().Any(u => u.UserName == username))
-            {
-                Console.WriteLine("User already exists. type new username or type 0 to cancel");
-                var tempUsername = Console.ReadLine();
-                if(tempUsername == "0")
-                    return;
-
-                username = tempUsername;
-            }
-
-            User newUser = new User(); 
-            newUser.UserName = username;
-            Console.WriteLine("\nAge: ");
-            newUser.Age = int.Parse(Console.ReadLine());
-            Console.WriteLine("\nGender: ");
-            newUser.Gender = Console.ReadLine();
-
-            Console.WriteLine($"\nAge: " + newUser.Age + "\nGender: " + newUser.Gender);
-            _services.CreateUser(newUser);
-
-        }
-
-        public Services.Services _services { get; set; }
-
+        
+        
         //Method to post a Post to a given Circle
         public void PostToCircle(Circle circle, Post content)
         {
@@ -95,13 +63,33 @@ namespace TheSocialNetworkConsoleApp.Queries
             createNewUser.Gender = Console.ReadLine();
 
             return _services.CreateUser(createNewUser); //create a new user 
-
         }
 
+        public void newUser()
+        {
+            Console.WriteLine("Enter username: ");
+            var username = Console.ReadLine();
+            while (_services.GetUser().Any(u => u.UserName == username))
+            {
+                Console.WriteLine("User already exists. type new username or type 0 to cancel");
+                var tempUsername = Console.ReadLine();
+                if (tempUsername == "0")
+                    return;
 
+                username = tempUsername;
+            }
 
+            User newUser = new User();
+            newUser.UserName = username;
+            Console.WriteLine("\nAge: ");
+            newUser.Age = int.Parse(Console.ReadLine());
+            Console.WriteLine("\nGender: ");
+            newUser.Gender = Console.ReadLine();
 
+            Console.WriteLine($"\nAge: " + newUser.Age + "\nGender: " + newUser.Gender);
+            _services.CreateUser(newUser);
 
+        }
 
         public void newCircle(User currentUser)
         {
@@ -128,7 +116,7 @@ namespace TheSocialNetworkConsoleApp.Queries
             _services.UpdateUser(currentUser.UserId, currentUser);
         }
 
-        public void AddComment(Post commentToPost)
+        public void NewComment(Post commentToPost)
         {
             Console.WriteLine("type comment: ");
             var comment = Console.ReadLine();
@@ -150,7 +138,6 @@ namespace TheSocialNetworkConsoleApp.Queries
                 }
             }
         }
-
         public void UpdatePosts(Post post)
         {
             var user = _services.GetUser().Single(u => u.UserName == post.Author);
