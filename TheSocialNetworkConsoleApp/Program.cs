@@ -1,5 +1,7 @@
 ﻿using System;
 using MongoDB.Driver;
+using TheSocialNetworkConsoleApp.Models;
+using TheSocialNetworkConsoleApp.Queries;
 
 namespace TheSocialNetworkConsoleApp
 {
@@ -17,7 +19,22 @@ namespace TheSocialNetworkConsoleApp
 
             Create create = new Create(services);
 
-            create.SeedingData();
+            create.SeedingData();           //comment this out after first run of the programme
+
+            User user = new User();
+            Wall wall = new Wall(services);
+            Feed feed = new Feed(services);
+
+            user = create.Login();
+
+
+
+            while (true)
+            {
+                
+
+            }
+
         }
     }
 }
