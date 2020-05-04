@@ -7,7 +7,7 @@ namespace TheSocialNetworkConsoleApp.Queries
 {
     public class Wall
     {
-        public Wall(Services services)
+        public Wall(Services.Services services)
         {
             _services = services;
         }
