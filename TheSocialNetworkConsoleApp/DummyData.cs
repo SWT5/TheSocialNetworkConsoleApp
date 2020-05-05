@@ -30,16 +30,19 @@ namespace TheSocialNetworkConsoleApp
             
             var henrik = _services.CreateUser(new User { UserName = "Henrik", Age = 22, Gender = "Male" });
             henrik.Circles.Add(studieven.CircleId);
+            henrik.BlockedList.Add(coronagruppen.CircleId);
             
             var odin = _services.CreateUser(new User { UserName = "Odin", Age = 20, Gender = "Male" });
             odin.Circles.Add(studieven.CircleId);
             odin.Circles.Add(coronagruppen.CircleId);
             odin.Circles.Add(WildWest.CircleId);
-
+            
 
             var ninna = _services.CreateUser(new User { UserName = "Ninna", Age = 25, Gender = "Female" });
             ninna.Circles.Add(folketinget.CircleId);
             ninna.Circles.Add(LoyaltoFamilia.CircleId);
+            ninna.FriendList.Add(odin.UserId);
+            odin.FriendList.Add(ninna.UserId);
 
             var ida = _services.CreateUser(new User { UserName = "Ida", Age = 21, Gender = "Female" });
             ida.Circles.Add(folketinget.CircleId);
@@ -57,8 +60,7 @@ namespace TheSocialNetworkConsoleApp
             vilde.Circles.Add(coronagruppen.CircleId);
             vilde.Circles.Add(WildWest.CircleId);
             vilde.Circles.Add(studieven.CircleId);
-
-
+           
             _services.UpdateUser(henrik.UserId, henrik);
             _services.UpdateUser(odin.UserId, odin);
             _services.UpdateUser(ninna.UserId, ninna);
