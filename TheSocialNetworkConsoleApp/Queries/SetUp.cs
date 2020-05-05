@@ -226,9 +226,6 @@ namespace TheSocialNetworkConsoleApp.Queries
             _services.UpdateUser(svend.UserId, svend);
             _services.UpdateUser(vilde.UserId, vilde);
 
-
-
-
             //create Posts that gets attached to circle
             PostToCircle(studieven, new TextPost
             {
