@@ -25,6 +25,24 @@ namespace TheSocialNetworkConsoleApp
             var folketinget = _services.CreateCircle(new Circle {CircleName = "folketinget"});
             var LoyaltoFamilia = _services.CreateCircle(new Circle {CircleName = "LoyaltoFamilia"});
 
+
+
+
+            //create Posts that gets attached to circle
+            setUp.PostToCircle(studieven, new TextPost
+            {
+                Author = ,
+                CreationTime = new DateTime(1997, 12,04, 12,2,53),
+                TextContent = "Jeg spår at der i fremtiden vil komme en pandemi"
+            });
+            setUp.PostToCircle(studieven, new VideoPost
+            {
+                Author = ,
+                CreationTime = new DateTime(1997, 12, 04, 12, 2, 53),
+                VideoContent = "Jeg spår at der i fremtiden vil komme en pandemi"
+            });
+
+
         }
     }
 }
