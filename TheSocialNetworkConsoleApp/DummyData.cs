@@ -67,6 +67,25 @@ namespace TheSocialNetworkConsoleApp
             _services.UpdateUser(ida.UserId, ida);
             _services.UpdateUser(svend.UserId, svend);
             _services.UpdateUser(vilde.UserId, vilde);
+
+
+
+
+            //create Posts that gets attached to circle
+            setUp.PostToCircle(studieven, new TextPost
+            {
+                Author = ,
+                CreationTime = new DateTime(1997, 12,04, 12,2,53),
+                TextContent = "Jeg spår at der i fremtiden vil komme en pandemi"
+            });
+            setUp.PostToCircle(studieven, new VideoPost
+            {
+                Author = ,
+                CreationTime = new DateTime(1997, 12, 04, 12, 2, 53),
+                VideoContent = "Jeg spår at der i fremtiden vil komme en pandemi"
+            });
+
+
         }
            
 
