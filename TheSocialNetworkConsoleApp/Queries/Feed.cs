@@ -40,7 +40,7 @@ namespace TheSocialNetworkConsoleApp.Queries
                 Feed.AddRange(circle.Posts);
             }
 
-            /*Returns 5 post to user's own feed:*/
+            /*Returns 10 post to user's own feed:*/
             return Feed.OrderByDescending(f => f.CreationTime).Take(10).ToList();
         }
 
