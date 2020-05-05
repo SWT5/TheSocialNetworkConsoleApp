@@ -102,7 +102,7 @@ namespace TheSocialNetworkConsoleApp
                                     Console.WriteLine("||                       PLEASE ENTER VIDEO CONTENT                                       ||");
                                     Console.WriteLine("------------------------------------------------------------------------------------------");
                                     var content = Console.ReadLine();
-                                    videoPost.Options.Add(videoContent, 0);
+                                    videoPost.Options.Add(content, 0);
                                 }
                             } while (videoInput != "0");
                             setUp.PostOptions(Currentuser, videoPost);

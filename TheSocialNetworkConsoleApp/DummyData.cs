@@ -72,17 +72,47 @@ namespace TheSocialNetworkConsoleApp
             //create Posts that gets attached to circle
             setUp.PostToCircle(studieven, new TextPost
             {
-                Author = ,
-                CreationTime = new DateTime(1997, 12,04, 12,2,53),
+                Author = henrik.UserName,
+                CreationTime = new DateTime(1997, 12, 04, 12, 2, 53),
                 TextContent = "Jeg spår at der i fremtiden vil komme en pandemi"
             });
             setUp.PostToCircle(studieven, new VideoPost
             {
-                Author = ,
-                CreationTime = new DateTime(1997, 12, 04, 12, 2, 53),
-                VideoContent = "Jeg spår at der i fremtiden vil komme en pandemi"
+                Author = odin.UserName,
+                CreationTime = new DateTime(1997, 07, 12, 3, 1, 22),
+                VideoContent = "Titanic"
+            });
+            setUp.PostToCircle(studieven, new VideoPost
+            {
+                Author = ninna.UserName,
+                CreationTime = new DateTime(2012, 12, 24, 12, 2, 53),
+                VideoContent = "Minions"
+            });
+            setUp.PostToCircle(coronagruppen, new TextPost()
+            {
+                Author = ida.UserName,
+                CreationTime = new DateTime(2020, 3, 26, 12, 2, 1),
+                TextContent = "Det er bevist at Corona er super godt, især på en varm sommerdag"
+            });
+            setUp.PostToCircle(WildWest, new TextPost()
+            {
+                Author = svend.UserName,
+                CreationTime = new DateTime(2001, 7, 3, 11, 32, 1),
+                TextContent = "I want to be a cowbow how do i become one?"
+            });
+            setUp.PostToCircle(WildWest, new VideoPost()
+            {
+                Author = vilde.UserName,
+                CreationTime = new DateTime(2020, 5, 2, 11, 3, 8),
+                VideoContent = "En video om genåbning"
             });
 
+            setUp.PostToCircle(LoyaltoFamilia, new VideoPost()
+            {
+                Author = svend.UserName,
+                CreationTime = new DateTime(2013, 5, 7, 00, 34, 9),
+                VideoContent = "BOOM HEADSHOT"
+            });
 
         }
            
