@@ -92,65 +92,8 @@ namespace TheSocialNetworkConsoleApp
                         }
                         input = "0";
                         break;
-                    
+
                     case "2":
-                        Console.WriteLine("------------------------------------------------------------------------------------------");
-                        Console.WriteLine("||                       THIS IS YOUR FEED                                              ||");
-                        Console.WriteLine("------------------------------------------------------------------------------------------");
-                        var yourFeed = feed.ShowFeed(Currentuser.UserId);
-                        int postNumberInFeed = 1;
-                        foreach (var post in yourFeed)
-                        {
-                            Console.WriteLine($"------------------ PostNumber: {postNumberInFeed++} ------------------------");
-                            post.print();
-                        }
-
-                        Console.WriteLine("|| 0  || Enter to add a comment for one of the posts      ||");
-                        if (yourFeed.OfType<MemePost>().Any())
-                        {
-                            Console.WriteLine("|| 1  || Enter to vote on meme   ||");
-                        }
-                        Console.WriteLine("|| Enter  || To continue             ||");
-                        var choosingComment = Console.ReadLine();
-                        if (choosingComment == "0")
-                        {
-                            var numberCommentsOfFeed = 0;
-                            do
-                            {
-                                Console.WriteLine("Please enter the number of post you wish to comment on: ");
-                                numberCommentsOfFeed = int.Parse(Console.ReadLine());
-                                if (numberCommentsOfFeed <= 5 && numberCommentsOfFeed >= 1)
-                                {
-                                    break;
-                                }
-
-                                warningMessageNumber_NotValid();
-                            } while (true);
-
-                            setUp.NewComment(yourFeed[numberCommentsOfFeed - 1]);
-                        }
-                        else if (choosingComment == "1")
-                        {
-                            var feedMemeNumber = 0;
-                            do
-                            {
-                                Console.WriteLine("Please enter the number of the post you wish to vote on: ");
-                                feedMemeNumber = int.Parse(Console.ReadLine());
-                                if (feedMemeNumber <= 5 && feedMemeNumber >= 1) break;
-                                if ((yourFeed[feedMemeNumber - 1] is MemePost)) break;
-                                warningMessageNumber_NotValid();
-                            } while (true);
-
-                            Console.WriteLine("Choose the option to vote for: (Name of the option. Case sensitive)");
-                            var feedMemeChoice = Console.ReadLine();
-                            var post = yourFeed[feedMemeNumber - 1] as MemePost;
-                            post.Options[feedMemeChoice]++;
-                            setUp.UpdatePosts(post);
-                        }
-                        input = "0";
-                        break;
-
-                    case "3":
                         Console.WriteLine("Please enter a user to visit their wall:");
                         var userInput = Console.ReadLine();
                         var findUser = services.GetUser().FirstOrDefault(u => userInput == u.UserName);
@@ -213,7 +156,96 @@ namespace TheSocialNetworkConsoleApp
                         input = "0";
                         break;
 
+                    case "3":
+                        Console.WriteLine("------------------------------------------------------------------------------------------");
+                        Console.WriteLine("||                       THIS IS YOUR FEED                                              ||");
+                        Console.WriteLine("------------------------------------------------------------------------------------------");
+                        var yourFeed = feed.ShowFeed(Currentuser.UserId);
+                        int postNumberInFeed = 1;
+                        foreach (var post in yourFeed)
+                        {
+                            Console.WriteLine($"------------------ PostNumber: {postNumberInFeed++} ------------------------");
+                            post.print();
+                        }
+
+                        Console.WriteLine("|| 0  || Enter to add a comment for one of the posts      ||");
+                        if (yourFeed.OfType<MemePost>().Any())
+                        {
+                            Console.WriteLine("|| 1  || Enter to vote on meme   ||");
+                        }
+                        Console.WriteLine("|| Enter  || To continue             ||");
+                        var choosingComment = Console.ReadLine();
+                        if (choosingComment == "0")
+                        {
+                            var numberCommentsOfFeed = 0;
+                            do
+                            {
+                                Console.WriteLine("Please enter the number of post you wish to comment on: ");
+                                numberCommentsOfFeed = int.Parse(Console.ReadLine());
+                                if (numberCommentsOfFeed <= 5 && numberCommentsOfFeed >= 1)
+                                {
+                                    break;
+                                }
+
+                                warningMessageNumber_NotValid();
+                            } while (true);
+
+                            setUp.NewComment(yourFeed[numberCommentsOfFeed - 1]);
+                        }
+                        else if (choosingComment == "1")
+                        {
+                            var feedMemeNumber = 0;
+                            do
+                            {
+                                Console.WriteLine("Please enter the number of the post you wish to vote on: ");
+                                feedMemeNumber = int.Parse(Console.ReadLine());
+                                if (feedMemeNumber <= 5 && feedMemeNumber >= 1) break;
+                                if ((yourFeed[feedMemeNumber - 1] is MemePost)) break;
+                                warningMessageNumber_NotValid();
+                            } while (true);
+
+                            Console.WriteLine("Choose the option to vote for: (Name of the option. Case sensitive)");
+                            var feedMemeChoice = Console.ReadLine();
+                            var post = yourFeed[feedMemeNumber - 1] as MemePost;
+                            post.Options[feedMemeChoice]++;
+                            setUp.UpdatePosts(post);
+                        }
+                        input = "0";
+                        break;
+
                     case "4":
+                        Console.WriteLine("Please enter a username you wish to add to your blocked list:");
+                        var BlockedUser = Console.ReadLine();
+                        var findUserToBlock = services.GetUser().FirstOrDefault(u => BlockedUser == u.UserName);
+                        if (findUserToBlock == null)
+                        {
+                            Console.WriteLine("------------------------------------------------------------------------------------------");
+                            Console.WriteLine("||                           WARNING: USER DOES NOT EXIST!                              ||");
+                            Console.WriteLine("------------------------------------------------------------------------------------------");
+                            input = "0";
+                            break;
+                        }
+
+                        if (Currentuser.BlockedList.Contains(findUserToBlock.UserId))
+                        {
+                            Currentuser.BlockedList.Add(findUserToBlock.UserId);
+                            Console.WriteLine("------------------------------------------------------------------------------------------");
+                            Console.WriteLine("||                        A USER HAS BEEN BLOCKED SUCCESSFULLY!                         ||");
+                            Console.WriteLine("------------------------------------------------------------------------------------------");
+                        }
+                        else
+                        {
+                            Currentuser.BlockedList.Remove(findUserToBlock.UserId);
+                            Console.WriteLine("------------------------------------------------------------------------------------------");
+                            Console.WriteLine("||                        A USER HAS BEEN UNBLOCKED SUCCESSFULLY!                       ||");
+                            Console.WriteLine("------------------------------------------------------------------------------------------");
+                        }
+                        services.UpdateUser(Currentuser.UserId, Currentuser);
+
+                        input = "0";
+                        break;
+
+                    case "5":
                         Console.WriteLine("Please enter the username you want to follow/unfollow: ");
                         var UserToFollow = Console.ReadLine();
                         var findUserToFollow = services.GetUser().FirstOrDefault(u => UserToFollow == u.UserName);
@@ -247,38 +279,6 @@ namespace TheSocialNetworkConsoleApp
                             Console.WriteLine("------------------------------------------------------------------------------------------");
                         }
                         //Currentuser.FriendList.Add(findUserToFollow.UserId);
-                        services.UpdateUser(Currentuser.UserId, Currentuser);
-
-                        input = "0";
-                        break;
-
-                    case "5":
-                        Console.WriteLine("Please enter a username you wish to add to your blocked list:");
-                        var BlockedUser = Console.ReadLine();
-                        var findUserToBlock = services.GetUser().FirstOrDefault(u => BlockedUser == u.UserName);
-                        if (findUserToBlock == null)
-                        {
-                            Console.WriteLine("------------------------------------------------------------------------------------------");
-                            Console.WriteLine("||                           WARNING: USER DOES NOT EXIST!                              ||");
-                            Console.WriteLine("------------------------------------------------------------------------------------------");
-                            input = "0";
-                            break;
-                        }
-
-                        if (Currentuser.BlockedList.Contains(findUserToBlock.UserId))
-                        {
-                            Currentuser.BlockedList.Add(findUserToBlock.UserId);
-                            Console.WriteLine("------------------------------------------------------------------------------------------");
-                            Console.WriteLine("||                        A USER HAS BEEN BLOCKED SUCCESSFULLY!                         ||");
-                            Console.WriteLine("------------------------------------------------------------------------------------------");
-                        }
-                        else
-                        {
-                            Currentuser.BlockedList.Remove(findUserToBlock.UserId);
-                            Console.WriteLine("------------------------------------------------------------------------------------------");
-                            Console.WriteLine("||                        A USER HAS BEEN UNBLOCKED SUCCESSFULLY!                       ||");
-                            Console.WriteLine("------------------------------------------------------------------------------------------");
-                        }
                         services.UpdateUser(Currentuser.UserId, Currentuser);
 
                         input = "0";
@@ -320,13 +320,13 @@ namespace TheSocialNetworkConsoleApp
             Console.WriteLine("------------------------------------------------------------------------------------------");
             Console.WriteLine("||                       THIS IS THE SOCIAL NETWORK                                       ||");
             Console.WriteLine("------------------------------------------------------------------------------------------");
-            Console.WriteLine("|| ID ||List of commands           || Description                                         ||");
+            Console.WriteLine("|| ID ||List of commands            || Description                                        ||");
             Console.WriteLine("------------------------------------------------------------------------------------------");
             Console.WriteLine("|| 1  ||Create Post                 || Creates a new post.                                ||");
-            Console.WriteLine("|| 2  ||Get Feed                    || Gets feed of user                                  ||");
-            Console.WriteLine("|| 3  ||Visit Wall                  || Visits the wall of another user                    ||");
-            Console.WriteLine("|| 4  ||Follow/unfollow user        || Follow or unfollows another user                   ||");
-            Console.WriteLine("|| 5  ||Block/unblock user          || put a user to blocked list                         ||");
+            Console.WriteLine("|| 2  ||Visit Wall                  || Visits the wall of another user                    ||");
+            Console.WriteLine("|| 3  ||Get Feed                    || Gets feed of user                                  ||");
+            Console.WriteLine("|| 4  ||Block/unblock user          || put a user to blocked list                         ||");
+            Console.WriteLine("|| 5  ||Follow/unfollow user        || Follow or unfollows another user                   ||");
             Console.WriteLine("|| 6  ||Add User                    || Adds a user to the program                         ||");
             Console.WriteLine("|| 7  ||Add/join Circle             || add or join a circle                               ||");
             Console.WriteLine("|| 8  ||Change User                 || change to another user                             ||");

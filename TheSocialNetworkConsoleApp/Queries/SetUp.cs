@@ -48,7 +48,10 @@ namespace TheSocialNetworkConsoleApp.Queries
 
         public User UserLogin()
         {
-            Console.WriteLine("What user do you want to be logged in as? - Enter username: ");
+            Console.WriteLine("------------------------------------------------------------------------------------------");
+            Console.WriteLine("||                       WHAT USER DO YOU WANT TO BE LOGGED IN AS?                        ||");
+            Console.WriteLine("||                               PLEASE ENTER A USERNAME                                  ||");
+            Console.WriteLine("------------------------------------------------------------------------------------------");
             var UN = Console.ReadLine();
             if (_services.GetUser().Any(un => un.UserName == UN)) //check if any user with this name exists in DB 
                 return _services.GetUser().First(u => u.UserName == UN); //return the user if exists 
