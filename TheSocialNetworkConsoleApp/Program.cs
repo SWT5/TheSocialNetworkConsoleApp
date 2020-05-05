@@ -134,7 +134,7 @@ namespace TheSocialNetworkConsoleApp
                         }
 
                         Console.WriteLine("|| 0  || Enter to add a comment      ||");
-                        if (wallOfUser.OfType<MemePost>().Any())
+                        if (wallOfUser.OfType<VideoPost>().Any())
                         {
                             Console.WriteLine("|| 1  || Enter to vote on meme   ||");
                         }
@@ -162,13 +162,13 @@ namespace TheSocialNetworkConsoleApp
                                 Console.WriteLine("Please enter the number of the post you wish to vote on:");
                                 wallMemeNumber = int.Parse(Console.ReadLine());
                                 if (wallMemeNumber <= 5 && wallMemeNumber >= 1) break;
-                                if ((wallOfUser[wallMemeNumber - 1] is MemePost)) break;
+                                if ((wallOfUser[wallMemeNumber - 1] is VideoPost)) break;
                                 warningMessageNumber_NotValid();
                             } while (true);
 
                             Console.WriteLine("Choose the option to vote for: (Name of the option. Case sensitive)");
                             var WallMemeChoice = Console.ReadLine();
-                            var post = wallOfUser[wallMemeNumber - 1] as MemePost;
+                            var post = wallOfUser[wallMemeNumber - 1] as VideoPost;
                             post.Options[WallMemeChoice]++;
                             setUp.UpdatePosts(post);
                         }
@@ -188,7 +188,7 @@ namespace TheSocialNetworkConsoleApp
                         }
 
                         Console.WriteLine("|| 0  || Enter to add a comment for one of the posts      ||");
-                        if (yourFeed.OfType<MemePost>().Any())
+                        if (yourFeed.OfType<VideoPost>().Any())
                         {
                             Console.WriteLine("|| 1  || Enter to vote on meme   ||");
                         }
@@ -219,13 +219,13 @@ namespace TheSocialNetworkConsoleApp
                                 Console.WriteLine("Please enter the number of the post you wish to vote on: ");
                                 feedMemeNumber = int.Parse(Console.ReadLine());
                                 if (feedMemeNumber <= 5 && feedMemeNumber >= 1) break;
-                                if ((yourFeed[feedMemeNumber - 1] is MemePost)) break;
+                                if ((yourFeed[feedMemeNumber - 1] is VideoPost)) break;
                                 warningMessageNumber_NotValid();
                             } while (true);
 
                             Console.WriteLine("Choose the option to vote for: (Name of the option. Case sensitive)");
                             var feedMemeChoice = Console.ReadLine();
-                            var post = yourFeed[feedMemeNumber - 1] as MemePost;
+                            var post = yourFeed[feedMemeNumber - 1] as VideoPost;
                             post.Options[feedMemeChoice]++;
                             setUp.UpdatePosts(post);
                         }
