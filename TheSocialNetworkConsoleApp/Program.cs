@@ -35,7 +35,8 @@ namespace TheSocialNetworkConsoleApp
                     input = "0";
                     break; 
 
-                default: 
+                default:
+                    Console.WriteLine("DummyData not inserted!");
                     input = "0";
                     break;
             }
