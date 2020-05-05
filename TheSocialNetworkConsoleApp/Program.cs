@@ -21,16 +21,15 @@ namespace TheSocialNetworkConsoleApp
             services.retrieveCollections();
 
             SetUp setUp = new SetUp(services);
-            DummyData dummyData = new DummyData(services);
             string input = "0";
 
             // insert dummydata 
-            Console.WriteLine("Want to insert dummydata? press D (Press any button if don't wish to add dummy data");
+            Console.WriteLine("Want to insert dummydata? press D (Press any button if don't wish to add dummy data)");
             input = Console.ReadLine();
             switch (input)
             {
                 case "D":
-                    dummyData.seedData();
+                    setUp.seedData();
                     Console.WriteLine("DummyData inserted!");
                     input = "0";
                     break; 
