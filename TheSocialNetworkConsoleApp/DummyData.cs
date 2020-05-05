@@ -63,6 +63,8 @@ namespace TheSocialNetworkConsoleApp
             _services.UpdateUser(odin.UserId, odin);
             _services.UpdateUser(ninna.UserId, ninna);
             _services.UpdateUser(ida.UserId, ida);
+            _services.UpdateUser(svend.UserId, svend);
+            _services.UpdateUser(vilde.UserId, vilde);
         }
            
 
