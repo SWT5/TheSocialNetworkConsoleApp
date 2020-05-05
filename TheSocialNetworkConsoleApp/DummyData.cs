@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using TheSocialNetworkConsoleApp.Models;
 using TheSocialNetworkConsoleApp.Queries;
 using TheSocialNetworkConsoleApp.Models;
 using TheSocialNetworkConsoleApp.Services;
@@ -37,6 +38,11 @@ namespace TheSocialNetworkConsoleApp
             _services.UpdateUser(ninna.UserId, ninna);
             _services.UpdateUser(ida.UserId, ida);
         }
+            var studieven = _services.CreateCircle(new Circle{CircleName = "Studieven"});
+            var coronagruppen = _services.CreateCircle(new Circle {CircleName = "coronagruppen" });
+            var WildWest = _services.CreateCircle(new Circle { CircleName = "WildWest" });
+            var folketinget = _services.CreateCircle(new Circle { CircleName = "folketinget" });
+            var LoyaltoFamilia = _services.CreateCircle(new Circle { CircleName = "LoyaltoFamilia" });
 
-    }
+        }
 }
