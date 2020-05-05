@@ -19,11 +19,12 @@ namespace TheSocialNetworkConsoleApp
 
         public void seedData()
         {
-            var studieven = _services.CreateCircle(new Circle{CircleName = "Studieven"});
-            var coronagruppen = _services.CreateCircle(new Circle {CircleName = "coronagruppen" });
-            var WildWest = _services.CreateCircle(new Circle { CircleName = "WildWest" });
-            var folketinget = _services.CreateCircle(new Circle { CircleName = "folketinget" });
-            var LoyaltoFamilia = _services.CreateCircle(new Circle { CircleName = "LoyaltoFamilia" });
+            var studieven = _services.CreateCircle(new Circle {CircleName = "Studieven"});
+            var coronagruppen = _services.CreateCircle(new Circle {CircleName = "coronagruppen"});
+            var WildWest = _services.CreateCircle(new Circle {CircleName = "WildWest"});
+            var folketinget = _services.CreateCircle(new Circle {CircleName = "folketinget"});
+            var LoyaltoFamilia = _services.CreateCircle(new Circle {CircleName = "LoyaltoFamilia"});
 
         }
+    }
 }
