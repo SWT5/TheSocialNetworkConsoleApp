@@ -59,15 +59,15 @@ namespace TheSocialNetworkConsoleApp
                             };
                             setUp.PostOptions(Currentuser, textPost);
                         }
-                        else if (postType == "M")
+                        else if (postType == "V")
                         {
-                            Console.WriteLine("Please enter Meme title: ");
-                            var memeContent = Console.ReadLine();
-                            string memeInput = "";
-                            MemePost memePost = new MemePost()
+                            Console.WriteLine("Please enter Video title: ");
+                            var videoContent = Console.ReadLine();
+                            string videoInput = "";
+                            VideoPost videoPost = new VideoPost()
                             {
                                 CreationTime = DateTime.Now,
-                                MemeContent = memeContent,
+                                VideoContent = videoContent,
                                 Options = new Dictionary<string, int>(),
                                 Author = Currentuser.UserName
                             };
@@ -75,20 +75,22 @@ namespace TheSocialNetworkConsoleApp
                             do
                             {
                                 Console.WriteLine("--------------------------------------");
-                                Console.WriteLine("|| 0  || add meme option            ||");
-                                Console.WriteLine("|| 1  || Create meme                ||");
-                                memeInput = Console.ReadLine();
-                                if (memeInput == "1")
+                                Console.WriteLine("|| 0  || Where to post               ||");
+                                Console.WriteLine("|| 1  || Create Video                ||");
+                                videoInput = Console.ReadLine();
+                                if (videoInput == "1")
                                 {
                                     Console.WriteLine("------------------------------------------------------------------------------------------");
-                                    Console.WriteLine("||                       PLEASE ENTER MEME CONTENT                                       ||");
+                                    Console.WriteLine("||                       PLEASE ENTER VIDEO CONTENT                                       ||");
                                     Console.WriteLine("------------------------------------------------------------------------------------------");
                                     var content = Console.ReadLine();
-                                    memePost.Options.Add(memeContent, 0);
+                                    videoPost.Options.Add(videoContent, 0);
                                 }
-                            } while (memeInput != "0");
-
-                            setUp.PostOptions(Currentuser, memePost);
+                            } while (videoInput != "0");
+                            setUp.PostOptions(Currentuser, videoPost);
+                            Console.WriteLine("-------------------------------------------------------------------------------------------");
+                            Console.WriteLine("||                       THE VIDEO HAS BEEN POSTED SUCCESSFULLY!                         ||");
+                            Console.WriteLine("-------------------------------------------------------------------------------------------");
                         }
                         input = "0";
                         break;
@@ -342,7 +344,7 @@ namespace TheSocialNetworkConsoleApp
             Console.WriteLine("|| ID ||List of commands            ||");
             Console.WriteLine("--------------------------------------");
             Console.WriteLine("|| T  || Text Post                  ||");
-            Console.WriteLine("|| M  || Meme Post                  ||");
+            Console.WriteLine("|| V  || Video Post                  ||");
             Console.WriteLine("||    || Anything else to return    ||");
         }
 

@@ -53,7 +53,7 @@ namespace TheSocialNetworkConsoleApp.Queries
             Console.WriteLine("||                               PLEASE ENTER A USERNAME                                  ||");
             Console.WriteLine("------------------------------------------------------------------------------------------");
             var UN = Console.ReadLine();
-            if (_services.GetUser().Any(un => un.UserName == UN)) //check if any user with this name exists in DB 
+            if (_services.GetUser().Any(u => u.UserName == UN)) //check if any user with this name exists in DB 
                 return _services.GetUser().First(u => u.UserName == UN); //return the user if exists 
 
             Console.WriteLine("The username you've entered doesn't exist in our database\n");
