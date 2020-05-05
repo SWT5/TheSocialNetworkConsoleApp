@@ -16,6 +16,8 @@ namespace TheSocialNetworkConsoleApp.Queries
             _services = services;
         }
 
+        
+        
         //Method to post a Post to a given Circle
         public void PostToCircle(Circle circle, Post content)
         {
