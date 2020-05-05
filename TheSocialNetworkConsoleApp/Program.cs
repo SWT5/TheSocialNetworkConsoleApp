@@ -25,6 +25,7 @@ namespace TheSocialNetworkConsoleApp
 
             // insert dummydata 
             Console.WriteLine("Want to insert dummydata? press D (Press any button if don't wish to add dummy data)");
+            Console.WriteLine("NOTE: if this is the first time running the program, its an good idea to insert dummyData");
             input = Console.ReadLine();
             switch (input)
             {
