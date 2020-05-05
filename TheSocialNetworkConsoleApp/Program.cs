@@ -21,7 +21,24 @@ namespace TheSocialNetworkConsoleApp
             services.retrieveCollections();
 
             SetUp setUp = new SetUp(services);
+            DummyData dummyData = new DummyData(services);
+            string input = "0";
 
+            // insert dummydata 
+            Console.WriteLine("Want to insert dummydata? press D");
+            input = Console.ReadLine();
+            switch (input)
+            {
+                case "D":
+                    dummyData.seedData();
+                    Console.WriteLine("DummyData inserted!");
+                    input = "0";
+                    break; 
+
+                default: 
+                    input = "0";
+                    break;
+            }
             //SetUp.SeedingData();           //comment this out after first run of the programme
 
             User Currentuser = new User();
@@ -33,7 +50,7 @@ namespace TheSocialNetworkConsoleApp
 
 
 
-            string input = "0";
+            //string input = "0";
 
             while (true)
             {
