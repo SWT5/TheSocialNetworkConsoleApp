@@ -21,6 +21,11 @@ namespace TheSocialNetworkConsoleApp
 
         public void seedData()
         {
+            var studieven = _services.CreateCircle(new Circle {CircleName = "Studieven"});
+            var coronagruppen = _services.CreateCircle(new Circle {CircleName = "coronagruppen"});
+            var WildWest = _services.CreateCircle(new Circle {CircleName = "WildWest"});
+            var folketinget = _services.CreateCircle(new Circle {CircleName = "folketinget"});
+            var LoyaltoFamilia = _services.CreateCircle(new Circle {CircleName = "LoyaltoFamilia"});
             var henrik = _services.CreateUser(new User { UserName = "Henrik", Age = 22, Gender = "Male" });
             henrik.CircleId.Add(Studieven.CircleId);
             
@@ -45,4 +50,5 @@ namespace TheSocialNetworkConsoleApp
             var LoyaltoFamilia = _services.CreateCircle(new Circle { CircleName = "LoyaltoFamilia" });
 
         }
+    }
 }
