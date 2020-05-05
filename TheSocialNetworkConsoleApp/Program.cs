@@ -21,7 +21,6 @@ namespace TheSocialNetworkConsoleApp
             services.retrieveCollections();
 
             SetUp setUp = new SetUp(services);
-            DummyData dummyData = new DummyData(services);
             string input = "0";
 
             // insert dummydata 
@@ -30,7 +29,7 @@ namespace TheSocialNetworkConsoleApp
             switch (input)
             {
                 case "D":
-                    dummyData.seedData();
+                    setUp.seedData();
                     Console.WriteLine("DummyData inserted!");
                     input = "0";
                     break; 
